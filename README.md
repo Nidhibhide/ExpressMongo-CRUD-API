@@ -49,6 +49,6 @@
 |--------|--------------|---------------------------|
 | POST   | `/api/users/create`  | Create a new user        |
 | GET    | `/api/users/getAll`  | Get all users            |
-| GET    | `/api/users/:id` | Get a user by ID        |
+| GET    | `/api/users/getById/:id` | Get a user by ID        |
 | PUT    | `/api/users/:id` | Update user information |
 | DELETE | `/api/users/:id` | Delete a user          |
