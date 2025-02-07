@@ -19,8 +19,8 @@
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/user-management-api.git
-   cd user-management-api
+   git clone https://github.com/Nidhibhide/ExpressMongo-CRUD-API.git
+   cd ExpressMongo-CRUD-API
    ```
 
 2. **Install dependencies**  
@@ -39,12 +39,11 @@
    ```bash
    npm run dev
    ```
+   
 
----
+##  API Endpoints  
 
-## 🔥 API Endpoints  
-
-### 1️⃣ **User Routes**  
+### **User Routes**  
 
 | Method | Endpoint       | Description               |
 |--------|--------------|---------------------------|
