@@ -6,7 +6,7 @@ import httpStatus from "http-status";
 // Create a new user
 const CreateUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password,orderIds } = req.body;
 
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
@@ -14,7 +14,7 @@ const CreateUser = async (req: Request, res: Response) => {
       return;
     }
 
-    const newUser: IUser = new UserModel({ name, email, password });
+    const newUser: IUser = new UserModel({ name, email, password,orderIds });
     await newUser.save();
 
     res.status(httpStatus.CREATED).json({
