@@ -13,8 +13,13 @@ router.route("/create").post(validateCreateUser, userController.CreateUser);
 // Route to get users
 router.route("/getAll").get(userController.getUsers);
 
-
 // Route to get user
 router.route("/getByid/:id").get(userController.getUserById);
+
+// Route to update user
+router.route("/update/:id").put(validateUpdateUser, userController.updateUser);
+
+// Route to delete user
+router.route("/delete/:id").delete(userController.deleteUser );
 
 export default router;

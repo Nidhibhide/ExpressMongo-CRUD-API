@@ -11,6 +11,7 @@ const port: number = 5000;
 
 app.use(helmet());
 app.use(express.json());
+
 app.use("/api", userRoutes);
 
 app.listen(port, () => {

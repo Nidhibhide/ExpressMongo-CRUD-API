@@ -50,10 +50,8 @@ const getUserById = async (req: Request, res: Response) => {
     const user = await UserModel.findById(id);
 
     if (!user) {
-       res
-        .status(httpStatus.NOT_FOUND)
-        .json({ message: "User not found" });
-        return
+      res.status(httpStatus.NOT_FOUND).json({ message: "User not found" });
+      return;
     }
 
     res.status(httpStatus.OK).json(user);
@@ -64,4 +62,55 @@ const getUserById = async (req: Request, res: Response) => {
   }
 };
 
-export default { CreateUser, getUsers, getUserById };
+// Update user
+
+const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    // Update only provided fields using `$set`
+    const user = await UserModel.findByIdAndUpdate(
+      id,
+      { $set: updatedData },
+      { new: true, runValidators: true }
+    );
+
+    if (!user) {
+      res.status(httpStatus.NOT_FOUND).json({ message: "User not found" });
+      return;
+    }
+
+    res.status(httpStatus.OK).json({
+      message: "Updated User successfully",
+      user,
+    });
+  } catch (error) {
+    console.error("Update error:", error);
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      message: "Server Error",
+    });
+  }
+};
+
+// Delete user
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findByIdAndDelete(id);
+
+    if (!user) {
+      res.status(httpStatus.NOT_FOUND).json({ message: "User not found" });
+      return;
+    }
+
+    res.status(httpStatus.OK).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Update error:", error);
+    res
+      .status(httpStatus.INTERNAL_SERVER_ERROR)
+      .json({ message: "Server Error" });
+  }
+};
+
+export default { CreateUser, getUsers, getUserById, updateUser, deleteUser };
