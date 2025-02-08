@@ -1,54 +1,66 @@
-# ExpressMongo-CRUD-API
 
-##  Features  
-- CRUD (Create, Read, Update, Delete) operations for user management  
+# **ExpressMongo-CRUD-API**  
+
+## **Features**  
+- CRUD operations for **Users & Orders**  
 - Built with **Express.js**, **TypeScript**, and **MongoDB**  
 - Input validation using **Joi**  
-- Authentication with **JWT Token**  
-- Secure API with **Helmet & CORS**  
- 
+- Secure API with **JWT, Helmet & CORS**  
+- **MongoDB Aggregation Pipeline** for advanced queries  
 
-## Tech Stack  
+
+## **Tech Stack**  
 - **Backend:** Node.js, Express.js, TypeScript  
-- **Database:** MongoDB
-- **Validation:** Joi 
-- **Authentication (Optional):** JWT  
+- **Database:** MongoDB  
+- **Validation:** Joi  
+- **Authentication:** JWT  
 - **Security:** Helmet, CORS  
 
-## Installation  
+## **Base URL**  
+All API requests must be prefixed with the following base URL:  
+```
+BASE_URL = http://localhost:5000/api
+```
 
-1. **Clone the repository**  
-   ```bash
-   git clone https://github.com/Nidhibhide/ExpressMongo-CRUD-API.git
-   cd ExpressMongo-CRUD-API
-   ```
+## **Installation**  
+```bash
+git clone https://github.com/Nidhibhide/ExpressMongo-CRUD-API.git
+cd ExpressMongo-CRUD-API
+npm install
+```
 
-2. **Install dependencies**  
-   ```bash
-   npm install
-   ```
+### **Set up environment variables**  
+Create a `.env` file and add:  
+```env
+PORT=5000
+MONGO_URI=your-mongodb-connection-string
+JWT_SECRET=your-secret-key
+```
 
-3. **Create a `.env` file** and add your environment variables  
-   ```env
-   PORT=5000
-   MONGO_URI=your-mongodb-connection-string
-   JWT_SECRET=your-secret-key
-   ```
+### **Run the server**  
+```bash
+npm run dev
+```
 
-4. **Start the server**  
-   ```bash
-   npm run dev
-   ```
-   
+## **API Endpoints**  
 
-##  API Endpoints  
+### **User Management**  
+- `POST ${BASE_URL}/user/create` → Create User  
+- `GET ${BASE_URL}/user/getAll` → Get All Users  
+- `GET ${BASE_URL}/user/getById/:id` → Get User by ID  
+- `PUT ${BASE_URL}/user/update/:id` → Update User  
+- `DELETE ${BASE_URL}/user/delete/:id` → Delete User  
 
-### **User Routes**  
+### **Order Management**  
+- `POST ${BASE_URL}/order/create` → Create Order  
+- `GET ${BASE_URL}/order/bill` → Get Bill
 
-| Method | Endpoint       | Description               |
-|--------|--------------|---------------------------|
-| POST   | `/api/create`  | Create a new user        |
-| GET    | `/api/getAll`  | Get all users            |
-| GET    | `/api/getById/:id` | Get a user by ID        |
-| PUT    | `/api/update/:id` | Update user information |
-| DELETE | `/api/delete/:id` | Delete a user          |
+## **Aggregation Pipeline**  
+This project leverages **MongoDB Aggregation Pipeline** to efficiently process and transform data. The pipeline includes:  
+
+- **Joining Orders with Users** – Uses `$lookup` to fetch related order details for each user.  
+- **Unwinding Orders** – Uses `$unwind` to deconstruct order arrays into individual documents.  
+- **Grouping Data** – Aggregates user order details such as total spent, number of orders, and purchased items.  
+- **Projecting Fields** – Uses `$project` to include only relevant fields like name, email, total spent, and order details.  
+- **Sorting Orders** – Applies `$sort` to arrange users based on total spending in ascending order.  
+
