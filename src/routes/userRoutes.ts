@@ -22,4 +22,7 @@ router.route("/update/:id").put(validateUpdateUser, userController.updateUser);
 // Route to delete user
 router.route("/delete/:id").delete(userController.deleteUser );
 
+// Route to delete user
+router.route("/login").post(userController.loginUser);
+
 export default router;
