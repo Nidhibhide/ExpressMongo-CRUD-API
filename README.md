@@ -1,4 +1,3 @@
-
 # **ExpressMongo-CRUD-API**  
 
 ## **Features**  
@@ -7,7 +6,6 @@
 - Input validation using **Joi**  
 - Secure API with **JWT, Helmet & CORS**  
 - **MongoDB Aggregation Pipeline** for advanced queries  
-
 
 ## **Tech Stack**  
 - **Backend:** Node.js, Express.js, TypeScript  
@@ -24,8 +22,11 @@ BASE_URL = http://localhost:5000/api
 
 ## **Installation**  
 ```bash
+# Clone the repository
 git clone https://github.com/Nidhibhide/ExpressMongo-CRUD-API.git
 cd ExpressMongo-CRUD-API
+
+# Install dependencies
 npm install
 ```
 
@@ -42,6 +43,12 @@ JWT_SECRET=your-secret-key
 npm run dev
 ```
 
+## **Authentication**
+This API uses **JWT (JSON Web Token)** for authentication. The token should be sent in the `Authorization` header as follows:
+```yaml
+Authorization: Bearer <your_token_here>
+```
+
 ## **API Endpoints**  
 
 ### **User Management**  
@@ -50,13 +57,14 @@ npm run dev
 - `GET ${BASE_URL}/user/getById/:id` → Get User by ID  
 - `PUT ${BASE_URL}/user/update/:id` → Update User  
 - `DELETE ${BASE_URL}/user/delete/:id` → Delete User  
+- `POST ${BASE_URL}/user/login` → Login User & Get Token  
 
 ### **Order Management**  
-- `POST ${BASE_URL}/order/create` → Create Order  
-- `GET ${BASE_URL}/order/bill` → Get Bill
+- `POST ${BASE_URL}/order/create` → Create Order (Protected)  
+- `GET ${BASE_URL}/order/bill` → Get Bill (Protected)  
 
-## **Aggregation Pipeline**  
-This project leverages **MongoDB Aggregation Pipeline** to efficiently process and transform data. The pipeline includes:  
+### **MongoDB Aggregation Pipeline**  
+This project leverages **MongoDB Aggregation Pipeline** for efficient data processing and transformation:
 
 - **Joining Orders with Users** – Uses `$lookup` to fetch related order details for each user.  
 - **Unwinding Orders** – Uses `$unwind` to deconstruct order arrays into individual documents.  
