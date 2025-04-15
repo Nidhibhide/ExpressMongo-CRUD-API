@@ -9,7 +9,7 @@ import { generateToken } from "../utils/GenerateToken";
 // Create a new user
 const CreateUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, orderIds } = req.body;
+    const { name, email, password, role } = req.body;
 
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
@@ -22,7 +22,7 @@ const CreateUser = async (req: Request, res: Response) => {
       name,
       email,
       password: hashedPassword,
-      orderIds,
+      role,
     });
     await newUser.save();
 

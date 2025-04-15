@@ -4,5 +4,6 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  orderIds: mongoose.Types.ObjectId[]; 
+  role: "admin" | "user" | "seller"; 
+  // orderIds: mongoose.Types.ObjectId[]; 
 }
